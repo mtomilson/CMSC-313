@@ -52,7 +52,36 @@ void insertNode(struct node *root, const char *morse, char letter)
 
 // build the tree needed to do morse to english conversion
 // see project description
-
+void buildMorseTree(struct node *root)
+{
+	// want to manually input all 26 letters of the alphabet
+	insertNode(root, ".-", 'a');
+	insertNode(root, "-...", 'b');
+	insertNode(root, "-.-.", 'c');
+	insertNode(root, "-..", 'd');
+	insertNode(root, ".", 'e');
+	insertNode(root, "..-.", 'f');
+	insertNode(root, "--.", 'g');
+	insertNode(root, "....", 'h');
+	insertNode(root, "..", 'i');
+	insertNode(root, ".---", 'j');
+	insertNode(root, "-.-", 'k');
+	insertNode(root, ".-..", 'l');
+	insertNode(root, "--", 'm');
+	insertNode(root, "-.", 'n');
+	insertNode(root, "---", 'o');
+	insertNode(root, ".--.", 'p');
+	insertNode(root, "--.-", 'q');
+	insertNode(root, ".-.", 'r');
+	insertNode(root, "...", 's');
+	insertNode(root, "-", 't');
+	insertNode(root, "..-", 'u');
+	insertNode(root, "...-", 'v');
+	insertNode(root, ".--", 'w');
+	insertNode(root, "-..-", 'x');
+	insertNode(root, "-.--", 'y');
+	insertNode(root, "--..", 'z');
+}
 
 // prints the Morse Tree in preorder
 void printMorseTree(struct node *node)
@@ -61,7 +90,7 @@ void printMorseTree(struct node *node)
 	{
 		return;
 	}
-	printf("%c\n", node->letter);
+	printf("%c ", node->letter);
 
 	printMorseTree(node->left);
 	printMorseTree(node->right);
@@ -125,7 +154,8 @@ void convertMorseToEnglish(char *characters, char *output)
 		}
 		characters++;
 	}
-
+	output[index] = '\0';
+	printMorseTree(root);
 	deleteTree(root);
 }
 
@@ -154,7 +184,7 @@ int main(int argc, char **argv)
 		message[length + 1] = '\0';
 
 		convertMorseToEnglish(message, output);
-		printf("%s\n", output);
+		printf("\n%s\n", output);
 		fclose(datafile);
 	}
 }
